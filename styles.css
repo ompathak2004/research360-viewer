@@ -1,0 +1,98 @@
+/* Research360 Unblur Extension Styles */
+
+/* Hide the lock overlay pseudo-element */
+div.d32.relative.activelock::after {
+  display: none !important;
+  content: none !important;
+}
+
+/* Remove all blur effects */
+.blurtext,
+.blurtext * {
+  filter: none !important;
+  -webkit-filter: none !important;
+  backdrop-filter: none !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+}
+
+/* Show hidden chips/sections */
+.chips-hidden-section {
+  visibility: visible !important;
+  height: auto !important;
+  overflow: visible !important;
+  display: block !important;
+  pointer-events: auto !important;
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+/* Show AlphaInvestPro and AlphaDayTrader elements */
+.AlphaInvestPro,
+.AlphaDayTrader {
+  display: flex !important;
+  visibility: visible !important;
+}
+
+/* Hide unlock overlay sections */
+.unlock-section {
+  display: none !important;
+}
+
+/* Hide unlock buttons */
+.unlock-btn-small,
+.unlock,
+a.unlock,
+button.unlock-btn-small {
+  display: none !important;
+}
+
+/* Make cards fully visible */
+.bg-white-cards.blurtext {
+  filter: none !important;
+  -webkit-filter: none !important;
+  pointer-events: auto !important;
+}
+
+/* Ensure recommendation content is visible */
+.recommendation-content {
+  display: block !important;
+}
+
+/* Remove any overlay/filter from cards */
+.mainbox .borderbox,
+.card-content,
+.relative.d32.activelock {
+  pointer-events: auto !important;
+  filter: none !important;
+}
+
+/* PDF Link Styles - Fix clickability */
+.borderbox-icon .viewReport {
+  cursor: pointer !important;
+  pointer-events: auto !important;
+  z-index: 9999 !important;
+  position: relative !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.borderbox-icon .viewReport img {
+  pointer-events: none !important;
+}
+
+/* Ensure PDF links in modal are clickable */
+.modal-body .viewReport,
+.modal-content .viewReport {
+  pointer-events: auto !important;
+  cursor: pointer !important;
+  z-index: 9999 !important;
+  position: relative !important;
+}
+
+/* Override any blocking styles on borderbox-icon */
+.borderbox-icon {
+  pointer-events: auto !important;
+  cursor: pointer !important;
+}

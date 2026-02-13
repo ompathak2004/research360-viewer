@@ -1,0 +1,27 @@
+{
+    "manifest_version": 3,
+    "name": "Research360 Unblur",
+    "version": "1.2",
+    "description": "Removes blur effect and lock overlay from Research360 advisory content",
+    "permissions": [
+        "activeTab"
+    ],
+    "content_scripts": [
+        {
+            "matches": [
+                "https://www.research360.in/mo-advice/advisory-products/*",
+                "https://www.research360.in/alpha-picks/*"
+            ],
+            "js": [
+                "content.js"
+            ],
+            "css": [
+                "styles.css"
+            ],
+            "run_at": "document_start"
+        }
+    ],
+    "icons": {
+        "48": "icon.png"
+    }
+}
