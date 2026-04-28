@@ -8,12 +8,23 @@ div.d32.relative.activelock::after {
 
 /* Remove all blur effects */
 .blurtext,
-.blurtext * {
+.blurtext *,
+.blur,
+.blur *,
+.blur-xs,
+.blur-xs * {
   filter: none !important;
   -webkit-filter: none !important;
   backdrop-filter: none !important;
   opacity: 1 !important;
   pointer-events: auto !important;
+}
+
+/* Remove stock page paywall overlays */
+div.absolute.left-0.top-0.w-full.h-full.bg-black\/20.backdrop-blur-sm.rounded-sm,
+.z-10.flex.flex-col.justify-center.items-center:has(img[alt="Lock Icon"]),
+.z-10.flex.flex-col.justify-center.items-center:has(p.text-xs.text-mo-white.text-center) {
+  display: none !important;
 }
 
 /* Show hidden chips/sections */

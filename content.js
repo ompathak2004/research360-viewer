@@ -2,10 +2,12 @@
 // Removes the 'blurtext' class and reveals hidden content from Research360 advisory pages
 
 function removeBlurAndUnlock() {
-  // Remove blur from all elements with blurtext class
-  const blurredElements = document.querySelectorAll('.blurtext');
+  // Remove blur from all known blur classes
+  const blurredElements = document.querySelectorAll('.blurtext, .blur, .blur-xs');
   blurredElements.forEach(element => {
     element.classList.remove('blurtext');
+    element.classList.remove('blur');
+    element.classList.remove('blur-xs');
     element.style.filter = 'none';
     element.style.webkitFilter = 'none';
   });
@@ -48,6 +50,8 @@ function removeBlurAndUnlock() {
     btn.style.display = 'none';
   });
 
+  removeStockPageLocks();
+
   // Make blurred cards fully visible
   const blurredCards = document.querySelectorAll('.bg-white-cards.blurtext');
   blurredCards.forEach(card => {
@@ -67,6 +71,35 @@ function removeBlurAndUnlock() {
   makePdfLinksClickable();
 
   console.log(`[Research360 Unblur] Removed blur and unlocked content`);
+}
+
+function removeStockPageLocks() {
+  // Remove the translucent lock overlay on stock pages.
+  const stockOverlays = document.querySelectorAll(
+    'div.absolute.left-0.top-0.w-full.h-full.bg-black\\/20.backdrop-blur-sm.rounded-sm'
+  );
+  stockOverlays.forEach(overlay => overlay.remove());
+
+  // Remove the centered lock icon/sign-up prompt while leaving the data behind it visible.
+  const lockImages = document.querySelectorAll('img[alt="Lock Icon"]');
+  lockImages.forEach(image => {
+    const lockPrompt = image.closest('.z-10.flex.flex-col.justify-center.items-center');
+    if (lockPrompt) {
+      lockPrompt.remove();
+    }
+  });
+
+  const signUpPrompts = Array.from(document.querySelectorAll('p')).filter(
+    element => element.textContent.trim().toLowerCase() === 'sign up to unlock'
+  );
+  signUpPrompts.forEach(prompt => {
+    const lockPrompt = prompt.closest('.z-10.flex.flex-col.justify-center.items-center');
+    if (lockPrompt) {
+      lockPrompt.remove();
+    } else {
+      prompt.remove();
+    }
+  });
 }
 
 function makePdfLinksClickable() {
@@ -140,15 +173,18 @@ const observer = new MutationObserver((mutations) => {
     mutation.addedNodes.forEach(node => {
       if (node.nodeType === 1) { // Element node
         // Check if the added node has blur-related classes
-        if (node.classList && (node.classList.contains('blurtext') || 
+        if (node.classList && (node.classList.contains('blurtext') ||
+            node.classList.contains('blur') ||
+            node.classList.contains('blur-xs') ||
             node.classList.contains('activelock') ||
             node.classList.contains('chips-hidden-section') ||
-            node.classList.contains('borderbox-icon'))) {
+            node.classList.contains('borderbox-icon') ||
+            node.classList.contains('backdrop-blur-sm'))) {
           shouldProcess = true;
         }
         // Check children of the added node
         if (node.querySelectorAll) {
-          const blurredChildren = node.querySelectorAll('.blurtext, .chips-hidden-section, .AlphaInvestPro, .AlphaDayTrader, .borderbox-icon');
+          const blurredChildren = node.querySelectorAll('.blurtext, .blur, .blur-xs, .chips-hidden-section, .AlphaInvestPro, .AlphaDayTrader, .borderbox-icon, .backdrop-blur-sm, img[alt="Lock Icon"]');
           if (blurredChildren.length > 0) {
             shouldProcess = true;
           }
