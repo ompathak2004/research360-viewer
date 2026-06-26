@@ -38,6 +38,12 @@ function removeBlurAndUnlock() {
     element.style.visibility = 'visible';
   });
 
+  // Remove lock overlay divs (catch any missed)
+  const lockOverlays2 = document.querySelectorAll('div.absolute.inset-0.z-20');
+  lockOverlays2.forEach(overlay => {
+    overlay.style.display = 'none';
+  });
+
   // Handle unlock sections - hide the overlay but keep content visible
   const unlockSections = document.querySelectorAll('.unlock-section');
   unlockSections.forEach(section => {
@@ -65,6 +71,12 @@ function removeBlurAndUnlock() {
   const recommendationContent = document.querySelectorAll('.recommendation-content');
   recommendationContent.forEach(content => {
     content.style.display = 'block';
+  });
+
+  // Remove lock overlay divs
+  const lockOverlays = document.querySelectorAll('div.absolute.inset-0.z-20');
+  lockOverlays.forEach(overlay => {
+    overlay.style.display = 'none';
   });
 
   // Make PDF links clickable - remove blocking event handlers

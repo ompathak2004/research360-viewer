@@ -6,6 +6,11 @@ div.d32.relative.activelock::after {
   content: none !important;
 }
 
+/* Remove lock overlay divs */
+div.absolute.inset-0.z-20.flex.flex-col.items-center.justify-center.rounded-2xl {
+  display: none !important;
+}
+
 /* Remove all blur effects */
 .blurtext,
 .blurtext *,
